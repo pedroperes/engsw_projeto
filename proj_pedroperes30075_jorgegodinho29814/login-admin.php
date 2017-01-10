@@ -7,7 +7,7 @@ require 'password_compat-master/lib/password.php';
 // Se tivermos sessão então vai para home.php
 if (isset($_SESSION['userSession']) != "") {
     header("Location: home-admin.php");
-}
+} 
 
 if (isset($_POST['btn-login'])) {
     // Tirar tags de HTML e PHP da string
