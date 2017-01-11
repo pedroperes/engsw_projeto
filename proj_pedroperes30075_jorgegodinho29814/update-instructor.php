@@ -1,9 +1,5 @@
 <?php
-session_start();
-require 'lib/nusoap.php';
-// Incluir dbconnect.php que é onde é feita a ligação com a DB
-include_once 'dbconnect.php';
-
+require 'includes.php';
 
 if (!isset($_SESSION['userSession'])) {
     header("Location: index.php");
@@ -15,15 +11,14 @@ $userRow = $query->fetch_array();
 
 
 if (isset($_POST["atualizar"])) {
-    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/ws2.php");
-    $client->soap_defencoding = 'UTF-8';
+    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/class.WS2.php");
     
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $gender = $_POST['gender'];
     $id =  $_SESSION['userSession'];
 
-    $result = $client->call('updateInstructor', array('nome' => $nome, 'gender' => $gender, 'email' => $email, 'id' => $id));
+    $result = $client->call('WS2.updateInstructor', array('nome' => $nome, 'gender' => $gender, 'email' => $email, 'id' => $id));
     
     $DBcon->close();
 }

@@ -1,9 +1,6 @@
 <?php
-session_start();
-// Incluir dbconnect.php que é onde é feita a ligação com a DB
-include_once 'dbconnect.php';
-// libraria do phpmailer que serve para enviar emails
-require("PHPMailer-master/PHPMailerAutoload.php");
+require 'includes.php';
+
 if (!isset($_SESSION['userSession'])) {
     header("Location: login-admin.php");
 }
@@ -49,8 +46,8 @@ $DBcon->close();
         <div class="col-sm-4">
             <h1>Menu</h1>
             <div class="list-group">
-                <a class="list-group-item" href="view-schedule.php">Ver Horario</a>
-                <a class="list-group-item" href="list-attendance.php">Lista de presencas por unidade curricular num determinado horario</a>
+                <a class="list-group-item" href="view-schedule.php">X Ver Horario</a>
+                <a class="list-group-item" href="list-attendance.php">X Lista de presencas por unidade curricular num determinado horario</a>
                 <a class="list-group-item" href="give-grades.php">Lancar Notas</a>
                 <a class="list-group-item" href="list-free-room.php">Pesquisar salas livres</a>
                 <a class="list-group-item" href="update-instructor.php">Atualizar dados</a>

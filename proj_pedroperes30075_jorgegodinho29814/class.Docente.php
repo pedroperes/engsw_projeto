@@ -1,8 +1,7 @@
 <?php
-require 'includes.php';
 
 class Docente {
-    
+
     function __construct() {
         
     }
@@ -34,7 +33,7 @@ class Docente {
 
         mysqli_close($conn);
     }
-    
+
     function addInstructorCourse($instructor_id, $course_id, $section_id) {
         $servername = "localhost";
         $username = "root";
@@ -47,19 +46,27 @@ class Docente {
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $query = "INSERT INTO teaches(instructor_id,course_id,section_id) VALUES ('" . $instructor_id . "','" . $course_id . "','" . $section_id . "')";
+        $query = "SELECT * FROM instructor WHERE name='$instructor_id'";
+        $result = mysqli_query($conn, $query);
+        $instructor_id = $result->fetch_assoc();
+
+        $query = "SELECT * FROM course WHERE title='$course_id'";
+        $result = mysqli_query($conn, $query);
+        $course_id = $result->fetch_assoc();
+
+        $query = "INSERT INTO teaches(instructor_id,course_id,section_id) VALUES ('" . $instructor_id['id'] . "','" . $course_id['id'] . "','" . $section_id . "')";
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registado com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
-    
+
     function giveGrades($student_id, $course_id, $grade) {
         $servername = "localhost";
         $username = "root";
@@ -72,19 +79,27 @@ class Docente {
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $query = "INSERT into grade (student_id, course_id, grade, date) VALUES (" . $student_id . ", " . $course_id . ", " . $grade . ", curdate());";
+        $query = "SELECT id FROM student WHERE name='$student_id'";
+        $result = mysqli_query($conn, $query);
+        $student_id = $result->fetch_assoc();
+
+        $query = "SELECT id FROM course WHERE title='$course_id'";
+        $result = mysqli_query($conn, $query);
+        $course_id = $result->fetch_assoc();
+
+        $query = "INSERT into grade (student_id, course_id, grade, date) VALUES (" . $student_id['id'] . ", " . $course_id['id'] . ", " . $grade . ", curdate());";
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
-    
+
     function updateInstructor($nome, $gender, $email, $id) {
         $servername = "localhost";
         $username = "root";
@@ -100,14 +115,14 @@ class Docente {
         $query = "UPDATE instructor SET name='$nome', gender='$gender', email='$email' WHERE id=" . $id;
 
         if (mysqli_query($conn, $query)) {
-            $msg = "Registo feito com sucesso!";
-            return $msg;
+            $msg = "Registado com sucesso!";
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
 
 }

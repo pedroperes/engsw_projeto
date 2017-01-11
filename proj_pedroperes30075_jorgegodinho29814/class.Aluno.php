@@ -1,12 +1,11 @@
 <?php
-require 'includes.php';
 
-class Aluno
-{
+class Aluno {
+
     function __construct() {
         
     }
-    
+
     function registerStudent($uname, $email, $gender, $upass) {
         $servername = "localhost";
         $username = "root";
@@ -25,13 +24,13 @@ class Aluno
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
 
     function listStudents($name, $code) {
@@ -58,7 +57,7 @@ class Aluno
 
         return $array;
     }
-    
+
     function enrollDegree($student_id, $degree_id) {
         $servername = "localhost";
         $username = "root";
@@ -71,19 +70,23 @@ class Aluno
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $query = "INSERT INTO student_degree (student_id, degree_id) VALUES (" . $student_id . ", " . $degree_id . ")";
+        $query = "SELECT * FROM degree WHERE name='$degree_id'";
+        $result = mysqli_query($conn, $query);
+        $userRow1 = $result->fetch_assoc();
+
+        $query = "INSERT INTO student_degree (student_id, degree_id) VALUES (" . $student_id . ", " . $userRow1['id'] . ")";
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
-    
+
     function enrollCourse($student_id, $course_id) {
         $servername = "localhost";
         $username = "root";
@@ -96,19 +99,23 @@ class Aluno
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $query = "INSERT INTO student_course (student_id, course_id) VALUES (" . $student_id . ", " . $course_id . ")";
+        $query = "SELECT * FROM course WHERE title='$course_id'";
+        $result = mysqli_query($conn, $query);
+        $userRow1 = $result->fetch_assoc();
+
+        $query = "INSERT INTO student_course (student_id, course_id) VALUES (" . $student_id . ", " . $userRow1['id'] . ")";
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
-    
+
     function updateStudent($nome, $gender, $email, $id) {
         $servername = "localhost";
         $username = "root";
@@ -125,15 +132,16 @@ class Aluno
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+
+        return $msg;
     }
 
-} /* end of class engsw.projeto_Aluno */
+}
 
+/* end of class engsw.projeto_Aluno */
 ?>

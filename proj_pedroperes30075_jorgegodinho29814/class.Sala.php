@@ -1,8 +1,7 @@
 <?php
-require 'includes.php';
-
 
 class Sala {
+
     function __construct() {
         
     }
@@ -19,20 +18,32 @@ class Sala {
             die("Connection failed: " . mysqli_connect_error());
         }
 
+        $query = "SELECT id FROM instructor WHERE name='$selectInstructor'";
+        $result = mysqli_query($conn, $query);
+        $selectInstructor = $result->fetch_assoc();
+
+        $query = "SELECT id FROM room WHERE number='$selectRoom'";
+        $result = mysqli_query($conn, $query);
+        $selectRoom = $result->fetch_assoc();
+
+        $query = "SELECT id FROM course WHERE title='$selectCourse'";
+        $result = mysqli_query($conn, $query);
+        $selectCourse = $result->fetch_assoc();
+
         $query = "INSERT INTO class(course_id,room_id,instructor_id,day,start_hour, duration) VALUES "
-                . "('" . $selectCourse . "','" . $selectRoom . "','" . $selectInstructor . "','" . $day . "','" . $start_hour . "','" . $duration . "')";
+                . "('" . $selectCourse['id'] . "','" . $selectRoom['id'] . "','" . $selectInstructor['id'] . "','" . $day . "','" . $start_hour . "','" . $duration . "')";
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registado com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+        
+        return $msg;
     }
-    
+
     function searchFreeRoom($room) {
         $servername = "localhost";
         $username = "root";

@@ -1,7 +1,4 @@
 <?php
-
-require 'includes.php';
-
 class Curso {
 
     function __construct() {

@@ -1,7 +1,5 @@
 <?php
 
-require 'includes.php';
-
 class Disciplina {
 
     function __construct() {

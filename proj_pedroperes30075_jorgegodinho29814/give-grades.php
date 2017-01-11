@@ -1,9 +1,5 @@
 <?php
-session_start();
-require 'lib/nusoap.php';
-require_once 'dbconnect.php';
-// Libraria que me permite usar a função password_verify/hash em versões anteriores a PHP 5.5
-require 'password_compat-master/lib/password.php';
+require 'includes.php';
 
 if (!isset($_SESSION['userSession'])) {
     header("Location: index.php");
@@ -13,20 +9,10 @@ if (isset($_POST['btn-signup'])) {
     $selectStudent = $_POST['selectStudent'];
     $selectCourse = $_POST['selectCourse'];
     $grade = $_POST['grade'];
-    
-    
-    $query = $DBcon->query("SELECT id FROM student WHERE name='$selectStudent'");
-    $selectStudent = $query->fetch_array();
-    
-    $query = $DBcon->query("SELECT id FROM course WHERE title='$selectCourse'");
-    $selectCourse = $query->fetch_array();
 
-    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/ws2.php");
-    $client->soap_defencoding = 'UTF-8';
+    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/class.WS2.php");
 
-    $result = $client->call('giveGrades', array('student_id' => $selectStudent['id'], 
-        'course_id' => $selectCourse['id'], 
-        'grade' => $grade));
+    $result = $client->call('WS2.giveGrades', array('student_id' => $selectStudent, 'course_id' => $selectCourse, 'grade' => $grade));
 
     $DBcon->close();
 }

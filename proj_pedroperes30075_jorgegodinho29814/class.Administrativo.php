@@ -1,6 +1,4 @@
 <?php
-require 'includes.php';
-
 class Administrativo {
     
     function __construct() {

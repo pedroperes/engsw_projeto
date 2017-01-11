@@ -1,7 +1,5 @@
 <?php
-session_start();
-// Incluir dbconnect.php que é onde é feita a ligação com a DB
-include_once 'dbconnect.php';
+require 'includes.php';
 
 
 if (!isset($_SESSION['userSession'])) {
@@ -54,9 +52,9 @@ $DBcon->close();
                 <a class="list-group-item" href="enroll-degree.php">Inscrição em Curso</a>
                 <a class="list-group-item" href="enroll-course.php">Inscrição em Disciplina</a>
                 <a class="list-group-item" href="update-student.php">Atualizar dados</a>
-                <a class="list-group-item" href="">Ver horário</a>
-                <a class="list-group-item" href="">Ver horario de atendimento do docente</a>
-                <a class="list-group-item" href="">Ver notas</a>
+                <a class="list-group-item" href="">X Ver horário</a>
+                <a class="list-group-item" href="">X Ver horario de atendimento do docente</a>
+                <a class="list-group-item" href="">X Ver notas</a>
             </div>
         </div>
         <div class="col-sm-4"><li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</a></li></div>

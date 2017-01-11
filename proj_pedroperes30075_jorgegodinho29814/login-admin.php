@@ -1,8 +1,5 @@
 <?php
-session_start();
-require_once 'dbconnect.php';
-// Libraria que me permite usar a função password_verify/hash em versões anteriores a PHP 5.5
-require 'password_compat-master/lib/password.php';
+require 'includes.php';
 
 // Se tivermos sessão então vai para home.php
 if (isset($_SESSION['userSession']) != "") {

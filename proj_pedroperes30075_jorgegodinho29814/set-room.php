@@ -1,9 +1,5 @@
 <?php
-session_start();
-require 'lib/nusoap.php';
-require_once 'dbconnect.php';
-// Libraria que me permite usar a função password_verify/hash em versões anteriores a PHP 5.5
-require 'password_compat-master/lib/password.php';
+require 'includes.php';
 
 if (!isset($_SESSION['userSession'])) {
     header("Location: index.php");
@@ -16,22 +12,12 @@ if (isset($_POST['btn-signup'])) {
     $day = $_POST['day'];
     $start_hour = $_POST['start_hour'];
     $duration = $_POST['duration'];
-    
-    $query = $DBcon->query("SELECT id FROM instructor WHERE name='$selectInstructor'");
-    $selectInstructor = $query->fetch_array();
-    
-    $query = $DBcon->query("SELECT id FROM room WHERE number='$selectRoom'");
-    $selectRoom = $query->fetch_array();
-    
-    $query = $DBcon->query("SELECT id FROM course WHERE title='$selectCourse'");
-    $selectCourse = $query->fetch_array();
 
-    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/ws1.php");
-    $client->soap_defencoding = 'UTF-8';
+    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/class.WS1.php");
 
-    $result = $client->call('setRoom', array('selectRoom' => $selectRoom['id'], 
-        'selectInstructor' => $selectInstructor['id'], 
-        'selectCourse' => $selectCourse['id'], 
+    $result = $client->call('WS1.setRoom', array('selectRoom' => $selectRoom, 
+        'selectInstructor' => $selectInstructor, 
+        'selectCourse' => $selectCourse, 
         'day' => $day, 
         'start_hour' => $start_hour,
         'duration' => $duration));

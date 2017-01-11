@@ -1,8 +1,5 @@
 <?php
-session_start();
-require 'lib/nusoap.php';
-// Incluir dbconnect.php que é onde é feita a ligação com a DB
-include_once 'dbconnect.php';
+require 'includes.php';
 
 
 if (!isset($_SESSION['userSession'])) {
@@ -16,16 +13,12 @@ $userRow = $query->fetch_array();
 $query1 = $DBcon->query("SELECT title FROM course");
 
 if (isset($_POST["atualizar"])) {
-    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/ws3.php");
-    $client->soap_defencoding = 'UTF-8';
+    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/class.WS3.php");
     
     $name = $_POST['name'];
     $student_id = $_SESSION['userSession'];
-    
-    $query2 = $DBcon->query("SELECT * FROM course WHERE title='$name'");
-    $userRow1 = $query2->fetch_array();
 
-    $result = $client->call('enrollCourse', array('student_id' => $student_id, 'course_id' => $userRow1['id']));
+    $result = $client->call('WS3.enrollCourse', array('student_id' => $student_id, 'course_id' => $name));
 
     $DBcon->close();
 }

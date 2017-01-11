@@ -1,9 +1,5 @@
 <?php
-session_start();
-// Incluir dbconnect.php que é onde é feita a ligação com a DB
-include_once 'dbconnect.php';
-// libraria do phpmailer que serve para enviar emails
-require("PHPMailer-master/PHPMailerAutoload.php");
+require 'includes.php';
 
 if (!isset($_SESSION['userSession'])) {
     header("Location: login-admin.php");
@@ -57,9 +53,9 @@ $DBcon->close();
                 <a class="list-group-item" href="create-degree.php">Criar curso</a>
                 <a class="list-group-item" href="add-instructor-course.php">Associar docentes a unidades curriculares</a>
                 <a class="list-group-item" href="list-students.php">Obter lista de alunos inscritos</a> 
-                <a class="list-group-item" href="">Criar horário para unidade curricular</a>
+                <a class="list-group-item" href="">X Criar horário para unidade curricular</a>
                 <a class="list-group-item" href="set-room.php">Definir sala para unidade curricular</a>
-                <a class="list-group-item" href="">Consultar a lista de notas de um aluno</a>
+                <a class="list-group-item" href="">X Consultar a lista de notas de um aluno</a>
                 <a class="list-group-item" href="list-free-room.php">Obter a lista de todas as salas livres num determinado periodo de tempo</a>
             </div>
         </div>

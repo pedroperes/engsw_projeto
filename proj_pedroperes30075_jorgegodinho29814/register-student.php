@@ -1,17 +1,12 @@
 <?php
-session_start();
-require 'lib/nusoap.php';
-require 'dbconnect.php';
-// Libraria que me permite usar a função password_verify/hash em versões anteriores a PHP 5.5
-require 'password_compat-master/lib/password.php';
+require 'includes.php';
 
 if (isset($_SESSION['userSession']) != "") {
     //header("Location: home.php");
 }
 
 if (isset($_POST['btn-signup'])) {
-    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/ws1.php");
-    $client->soap_defencoding = 'UTF-8';
+    $client = new nusoap_client("http://localhost/engsw/proj_pedroperes30075_jorgegodinho29814/class.WS1.php");
 
     // Tirar tags de HTML e PHP da string
     $uname = strip_tags($_POST['username']);
@@ -25,7 +20,7 @@ if (isset($_POST['btn-signup'])) {
     $upass = $DBcon->real_escape_string($upass);
     $gender = $DBcon->real_escape_string($gender);
 
-    $result = $client->call('registerStudent', array('uname' => $uname, 'email' => $email, 'gender' => $gender, 'upass' => $upass));
+    $result = $client->call('WS1.registerStudent', array('uname' => $uname, 'email' => $email, 'gender' => $gender, 'upass' => $upass));
 
     $DBcon->close();
 }
