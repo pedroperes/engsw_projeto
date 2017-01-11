@@ -24,13 +24,13 @@ class Administrativo {
 
         if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+        
+        return $msg;
     }
 }
 

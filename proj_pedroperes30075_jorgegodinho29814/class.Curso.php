@@ -20,14 +20,14 @@ class Curso {
         $query = "INSERT INTO degree(name,code) VALUES('$name','$code')";
 
         if (mysqli_query($conn, $query)) {
-            $msg = "Disciplina criada com sucesso!";
-            return $msg;
+            $msg = "Curso criado com sucesso!";
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+        
+        return $msg;
     }
 
 }

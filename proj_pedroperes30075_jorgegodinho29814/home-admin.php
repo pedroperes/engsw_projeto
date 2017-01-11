@@ -21,7 +21,7 @@ $DBcon->close();
         <meta name="Pedro Peres, Jorge Godinho" content="">
         <link rel="icon" href="../../favicon.ico">
 
-        <title>Painél de <?php echo $userRow['name']; ?></title>
+        <title>Painel de <?php echo $userRow['name']; ?></title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bootstrap-3.3.7/docs/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,6 +51,7 @@ $DBcon->close();
                 <a class="list-group-item" href="register-docente.php">Registar docente</a>
                 <a class="list-group-item" href="register-admin.php">Registar administrativo</a>
                 <a class="list-group-item" href="create-degree.php">Criar curso</a>
+                <a class="list-group-item" href="create-course.php">Criar disciplina</a>
                 <a class="list-group-item" href="add-instructor-course.php">Associar docentes a unidades curriculares</a>
                 <a class="list-group-item" href="list-students.php">Obter lista de alunos inscritos</a> 
                 <a class="list-group-item" href="">X Criar horário para unidade curricular</a>

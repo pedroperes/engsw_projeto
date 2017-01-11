@@ -23,15 +23,15 @@ class Docente {
 
         $query = "INSERT INTO instructor(name,email,password, gender) VALUES('$uname','$email','$hashed_password', '$gender')";
 
-        if (mysqli_query($conn, $query)) {
+       if (mysqli_query($conn, $query)) {
             $msg = "Registo feito com sucesso!";
-            return $msg;
         } else {
             $msg = "Erro ao registar!";
-            return $msg;
         }
 
         mysqli_close($conn);
+        
+        return $msg;
     }
 
     function addInstructorCourse($instructor_id, $course_id, $section_id) {

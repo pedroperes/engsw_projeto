@@ -72,6 +72,20 @@ class WS1 {
         );
 
         $this->server->register(
+                'WS1.createCourse', // method name
+                array('title' => 'xsd:string', // input parameters
+            'ects' => 'xsd:int',
+            'selectDegree' => 'xsd:string',
+            'description' => 'xsd:string'), // input parameters
+                array('return' => 'xsd:string'), // output parameters
+                'urn:ws1wsdl', // namespace
+                'urn:ws1wsdl#createcourse', // soapaction
+                'rpc', // style
+                'encoded', // use
+                'Criar disciplina'                        // documentation
+        );
+
+        $this->server->register(
                 'WS1.addInstructorCourse', // method name
                 array('instructor_id' => 'xsd:string', // input parameters
             'course_id' => 'xsd:string', // input parameters
@@ -112,7 +126,7 @@ class WS1 {
                 'Listar estudantes'                        // documentation
         );
 
-        
+
 
 // ------------------------------------------------------------------------- //
     }
@@ -135,6 +149,11 @@ class WS1 {
     function createDegree($name, $code) {
         $c = new Curso();
         return $c->createDegree($name, $code);
+    }
+
+    function createCourse($title, $ects, $selectDegree, $description) {
+        $d = new Disciplina();
+        return $d->createCourse($title, $ects, $selectDegree, $description);
     }
 
     function addInstructorCourse($instructor_id, $course_id, $section_id) {

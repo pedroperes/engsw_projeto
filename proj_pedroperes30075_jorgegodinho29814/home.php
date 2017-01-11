@@ -22,7 +22,7 @@ $DBcon->close();
         <meta name="Pedro Peres, Jorge Godinho" content="">
         <link rel="icon" href="../../favicon.ico">
 
-        <title>Painél de <?php echo $userRow['name']; ?></title>
+        <title>Painel de <?php echo $userRow['name']; ?></title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bootstrap-3.3.7/docs/dist/css/bootstrap.min.css" rel="stylesheet">
